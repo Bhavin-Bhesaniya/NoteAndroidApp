@@ -90,7 +90,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Set Time"
-                android:layout_marginLeft="30dp"
+                android:background="@drawable/filter_list_btn"
+                android:layout_marginLeft="20dp"
+                android:padding="10dp"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -99,7 +101,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Time Here"
                 android:layout_marginStart="20dp"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -117,7 +118,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Set Date"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="20dp"
+                android:padding="10dp"
+                android:background="@drawable/filter_list_btn"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -126,7 +129,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Date Here"
                 android:layout_marginStart="20dp"
                 android:textSize="20sp"
                 android:textStyle="bold" />

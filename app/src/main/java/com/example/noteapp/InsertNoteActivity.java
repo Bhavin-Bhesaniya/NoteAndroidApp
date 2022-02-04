@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.Toast;
@@ -101,13 +100,15 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
         noteViewModel.InsertNote(note);
         callNotification();
 //        setAlarm();
-        scheduleNotification(getNotification(), calendar.getTimeInMillis());
+        scheduleNotification(getNotification(note_title, note_detail), calendar.getTimeInMillis());
         Toast.makeText(getApplicationContext(), "Note Added SuccessFully", Toast.LENGTH_SHORT).show();
-//        finish();
+        finish();
     }
 
     private void showDatePicker() {
-        Calendar calendar = Calendar.getInstance();
+        if (null == calendar) {
+            calendar = Calendar.getInstance();
+        }
         cyear = calendar.get(Calendar.YEAR);
         cmonth = calendar.get(Calendar.MONTH);
         cday = calendar.get(Calendar.DAY_OF_MONTH);
@@ -116,6 +117,9 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 binding.dateDispTime.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             }
         }, cyear, cmonth, cday);
         datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis() - 1000);
@@ -153,7 +157,9 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
             } else {
                 binding.timeDispTime.setText(picker.getHour() + " : " + picker.getMinute() + " AM");
             }
-            calendar = Calendar.getInstance();
+            if (null == calendar) {
+                calendar = Calendar.getInstance();
+            }
             calendar.set(Calendar.HOUR_OF_DAY, picker.getHour());
             calendar.set(Calendar.MINUTE, picker.getMinute());
             calendar.set(Calendar.SECOND, 0);
@@ -161,21 +167,15 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
         });
     }
 
-    private void setAlarm() {
-        long sec = calendar.getTimeInMillis();
-        Log.d("Se", "Set Alarm : " + sec);
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, sec, pendingIntent);
-        Toast.makeText(this, "SuccessesFully Set", Toast.LENGTH_SHORT).show();
-    }
+    private Notification getNotification(String note_title, String note_detail) {
+        Intent i = new Intent(this, MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, i, 0);
 
-    private Notification getNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(InsertNoteActivity.this, "Android")
                 .setSmallIcon(R.drawable.ic_launcher)
-                .setContentTitle("Task Pending")
-                .setContentText("Hey alarm running")
+                .setContentTitle("Reminder For your Note : " + note_title)
+                .setContentText(note_detail)
                 .setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -184,12 +184,12 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void scheduleNotification(Notification notification, long delay) {
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, AlarmReceiver.class);
         notificationIntent.putExtra("NOTIFICATION_ID", 1);
         notificationIntent.putExtra("NOTIFICATION", notification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         assert alarmManager != null;
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, delay, pendingIntent);
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, delay, pendingIntent);
     }
 }

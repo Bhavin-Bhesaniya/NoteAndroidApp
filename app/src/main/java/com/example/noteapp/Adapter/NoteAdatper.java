@@ -53,30 +53,25 @@ public class NoteAdatper extends RecyclerView.Adapter<NoteAdatper.NoteViewHolder
         } else {
             holder.notePriority.setBackgroundResource(R.drawable.green_shape);
         }
-
-
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(mainActivity, UpdateNoteActivity.class);
             intent.putExtra("id", note.id);
             intent.putExtra("title", note.note_title);
             intent.putExtra("note", note.notes);
             intent.putExtra("priority", note.note_priority);
+            intent.putExtra("date",note.note_date);
+            intent.putExtra("time",note.note_time);
             mainActivity.startActivity(intent);
-
         });
-
     }
 
     @Override
     public int getItemCount() {
         return notes.size();
     }
-
     public static class NoteViewHolder extends RecyclerView.ViewHolder {
         TextView title,notesDate;
         View notePriority;
-
-
         public NoteViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.showNoteTitle);
