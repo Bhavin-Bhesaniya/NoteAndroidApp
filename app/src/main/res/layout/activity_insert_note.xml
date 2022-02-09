@@ -61,8 +61,8 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_baseline_done_24"
-                android:background="@drawable/green_shape" />
+                android:background="@drawable/green_shape"
+                android:src="@drawable/ic_baseline_done_24" />
 
         </LinearLayout>
 
@@ -81,18 +81,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="10dp"
+            android:orientation="horizontal"
             android:padding="10dp">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/setTimeBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Set Time"
-                android:background="@drawable/filter_list_btn"
                 android:layout_marginLeft="20dp"
+                android:background="@drawable/filter_list_btn"
                 android:padding="10dp"
+                android:text="Set Time"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -109,18 +109,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="10dp"
+            android:orientation="horizontal"
             android:padding="10dp">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/setDateBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Set Date"
                 android:layout_marginLeft="20dp"
-                android:padding="10dp"
                 android:background="@drawable/filter_list_btn"
+                android:padding="10dp"
+                android:text="Set Date"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 

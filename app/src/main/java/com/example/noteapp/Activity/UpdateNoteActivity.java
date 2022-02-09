@@ -1,9 +1,13 @@
 package com.example.noteapp.Activity;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,7 +22,9 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.noteapp.AlarmReceiver;
 import com.example.noteapp.Entity.Note;
+import com.example.noteapp.MainActivity;
 import com.example.noteapp.R;
 import com.example.noteapp.ViewModel.NoteViewModel;
 import com.example.noteapp.databinding.ActivityUpdateNoteBinding;
@@ -27,6 +33,7 @@ import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class UpdateNoteActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -43,6 +50,8 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
     //Notification
     NotificationManagerCompat notificationCompat;
     Notification notification;
+
+    Date datetm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,41 +85,23 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
         binding.upPriorityHigh.setOnClickListener(this);
         binding.upPriorityMedium.setOnClickListener(this);
         binding.upPriorityLow.setOnClickListener(this);
-
         binding.setDateBtn.setOnClickListener(this);
         binding.setTimeBtn.setOnClickListener(this);
+        binding.updateNoteBtn.setOnClickListener(this);
+        binding.deleteNoteBtn.setOnClickListener(this);
 
 
-        binding.updateNoteBtn.setOnClickListener(v -> {
-            String title = binding.upNoteTitle.getText().toString();
-            String noteDetail = binding.upNotesDetail.getText().toString();
-            UpdateNotes(title, noteDetail);
-        });
-
-        binding.deleteNoteBtn.setOnClickListener(v -> {
-
-            BottomSheetDialog sheetDialog = new BottomSheetDialog(UpdateNoteActivity.this);
-            View view = LayoutInflater.from(UpdateNoteActivity.this).inflate(R.layout.delete_bottom_sheet,
-                    (LinearLayout) findViewById(R.id.bottomSheet));
-            sheetDialog.setContentView(view);
-            sheetDialog.show();
-
-            Button yesDelete, noDelete;
-            yesDelete = view.findViewById(R.id.yesDeleteBtn);
-            noDelete = view.findViewById(R.id.noDeleteBtn);
-
-            yesDelete.setOnClickListener(v1 -> {
-                noteViewModel.DeleteNote(up_note_id);
-                finish();
-                Toast.makeText(getApplicationContext(), "Not Successfully deleted", Toast.LENGTH_SHORT).show();
-            });
-            noDelete.setOnClickListener(v1 -> {
-                sheetDialog.dismiss();
-            });
-        });
     }
 
     private void UpdateNotes(String title, String noteDetail) {
+//        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+//        try {
+//            datetm = sdf.parse(up_note_time);
+//        } catch (ParseException e) {
+//            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+//        }
+//        calendar.setTime(datetm);
+
         Note note = new Note();
         note.id = up_note_id;
         note.note_title = title;
@@ -118,6 +109,7 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
         note.note_priority = priority;
         note.note_date = binding.dateDispTime.getText().toString();
         note.note_time = binding.timeDispTime.getText().toString();
+        scheduleNotification(getNotification(title, noteDetail), calendar.getTimeInMillis());
         noteViewModel.UpdateNote(note);
         callNotification();
         Toast.makeText(getApplicationContext(), "Note Updated SuccessFully", Toast.LENGTH_SHORT).show();
@@ -128,7 +120,11 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.upPriorityHigh) {
+        if (id == R.id.updateNoteBtn) {
+            String title = binding.upNoteTitle.getText().toString();
+            String noteDetail = binding.upNotesDetail.getText().toString();
+            UpdateNotes(title, noteDetail);
+        } else if (id == R.id.upPriorityHigh) {
             priority = "3";
             binding.upPriorityHigh.setImageResource(R.drawable.ic_baseline_done_24);
             binding.upPriorityMedium.setImageResource(0);
@@ -147,8 +143,27 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
             showDatePicker();
         } else if (id == R.id.setTimeBtn) {
             showTimePicker();
+        } else if (id == R.id.deleteNoteBtn) {
+            BottomSheetDialog sheetDialog = new BottomSheetDialog(UpdateNoteActivity.this);
+            View view = LayoutInflater.from(UpdateNoteActivity.this).inflate(R.layout.delete_bottom_sheet, (LinearLayout) findViewById(R.id.bottomSheet));
+            sheetDialog.setContentView(view);
+            sheetDialog.show();
+
+            Button yesDelete, noDelete;
+            yesDelete = view.findViewById(R.id.yesDeleteBtn);
+            noDelete = view.findViewById(R.id.noDeleteBtn);
+
+            yesDelete.setOnClickListener(v1 -> {
+                noteViewModel.DeleteNote(up_note_id);
+                finish();
+                Toast.makeText(getApplicationContext(), "Not Successfully deleted", Toast.LENGTH_SHORT).show();
+            });
+            noDelete.setOnClickListener(v1 -> {
+                sheetDialog.dismiss();
+            });
         }
     }
+
     private void showDatePicker() {
         Calendar calendar = Calendar.getInstance();
         cyear = calendar.get(Calendar.YEAR);
@@ -166,6 +181,7 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void showTimePicker() {
+
         picker = new MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_12H)
                 .setHour(12)
@@ -187,6 +203,7 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
             calendar.set(Calendar.MILLISECOND, 0);
         });
     }
+
     public void callNotification() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("MyNoteUp", "My Channel", NotificationManager.IMPORTANCE_DEFAULT);
@@ -201,5 +218,31 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
         notification = builder.build();
         notificationCompat = NotificationManagerCompat.from(this);
         notificationCompat.notify(1, notification);
+    }
+
+    private Notification getNotification(String note_title, String note_detail) {
+        Intent i = new Intent(this, MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, i, 0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(UpdateNoteActivity.this, "Android")
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setContentTitle("Reminder For your Note : " + note_title)
+                .setContentText(note_detail)
+                .setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingIntent);
+        return builder.build();
+    }
+
+    private void scheduleNotification(Notification notification, long delay) {
+        Intent notificationIntent = new Intent(this, AlarmReceiver.class);
+        notificationIntent.putExtra("NOTIFICATION_ID", 1);
+        notificationIntent.putExtra("NOTIFICATION", notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        assert alarmManager != null;
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, delay, pendingIntent);
     }
 }

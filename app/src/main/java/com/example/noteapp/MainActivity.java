@@ -1,10 +1,8 @@
 package com.example.noteapp;
 
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,7 +24,6 @@ import com.example.noteapp.ViewModel.NoteViewModel;
 import com.example.noteapp.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 
@@ -42,12 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView noFilter, highToLowFilter, lowToHighFilter;
 
     ImageView showFilter;
-    boolean filterVisible = true;
+    boolean filterVisible = true, fabOnOff = true;
     List<Note> filterNoteList;
-
-    Calendar calendar;
-    AlarmManager alarmManager;
-    PendingIntent pendingIntent;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -88,18 +81,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.addBtn) {
-            binding.addNewNote.setVisibility(View.VISIBLE);
-            binding.showFilter.setVisibility(View.VISIBLE);
-        } else if (id == R.id.addNewNote) {
+        if (id == R.id.addNewNote) {
             startActivity(new Intent(MainActivity.this, InsertNoteActivity.class));
+        } else if (id == R.id.addBtn) {
+            if (fabOnOff) {
+                binding.addNewNote.setVisibility(View.VISIBLE);
+                binding.showFilter.setVisibility(View.VISIBLE);
+                fabOnOff = false;
+            } else {
+                binding.addNewNote.setVisibility(View.GONE);
+                binding.showFilter.setVisibility(View.GONE);
+                fabOnOff = true;
+            }
         } else if (id == R.id.showFilter) {
             if (filterVisible) {
                 noFilter.setVisibility(View.VISIBLE);
                 highToLowFilter.setVisibility(View.VISIBLE);
                 lowToHighFilter.setVisibility(View.VISIBLE);
                 filterVisible = false;
-
             } else {
                 noFilter.setVisibility(View.GONE);
                 highToLowFilter.setVisibility(View.GONE);

@@ -41,8 +41,7 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
     int cyear, cmonth, cday;
     MaterialTimePicker picker;
     Calendar calendar;
-    AlarmManager alarmManager;
-    PendingIntent pendingIntent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +89,6 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void CreateNotes(String note_title, String note_detail) {
-
         Note note = new Note();
         note.note_title = note_title;
         note.notes = note_detail;
@@ -99,7 +97,6 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
         note.note_time = binding.timeDispTime.getText().toString();
         noteViewModel.InsertNote(note);
         callNotification();
-//        setAlarm();
         scheduleNotification(getNotification(note_title, note_detail), calendar.getTimeInMillis());
         Toast.makeText(getApplicationContext(), "Note Added SuccessFully", Toast.LENGTH_SHORT).show();
         finish();
