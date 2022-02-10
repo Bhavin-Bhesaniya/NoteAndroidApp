@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.noteapp.Activity.UpdateNoteActivity;
+import com.example.noteapp.UpdateNoteActivity;
 import com.example.noteapp.Entity.Note;
 import com.example.noteapp.MainActivity;
 import com.example.noteapp.R;
@@ -46,6 +46,7 @@ public class NoteAdatper extends RecyclerView.Adapter<NoteAdatper.NoteViewHolder
         holder.title.setText(note.note_title);
         holder.noteDetail.setText(note.notes);
         holder.notesDate.setText(note.note_date);
+        holder.noteTime.setText(note.note_time);
 
         if (note.note_priority.equals("3")) {
             holder.notePriority.setBackgroundResource(R.drawable.red_shape);
@@ -72,7 +73,7 @@ public class NoteAdatper extends RecyclerView.Adapter<NoteAdatper.NoteViewHolder
     }
 
     public static class NoteViewHolder extends RecyclerView.ViewHolder {
-        TextView title, notesDate, noteDetail;
+        TextView title, notesDate, noteDetail, noteTime;
         View notePriority;
 
         public NoteViewHolder(@NonNull View itemView) {
@@ -81,7 +82,7 @@ public class NoteAdatper extends RecyclerView.Adapter<NoteAdatper.NoteViewHolder
             noteDetail = itemView.findViewById(R.id.showDetail);
             notesDate = itemView.findViewById(R.id.showNoteDate);
             notePriority = itemView.findViewById(R.id.showNotePriority);
-
+            noteTime = itemView.findViewById(R.id.showNoteTime);
         }
     }
 }

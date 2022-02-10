@@ -171,8 +171,8 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(InsertNoteActivity.this, "Android")
                 .setSmallIcon(R.drawable.ic_launcher)
-                .setContentTitle("Reminder For your Note : " + note_title)
-                .setContentText(note_detail)
+                .setContentTitle("Your Note Reminder : " + note_title)
+                .setContentText("\n"+note_detail)
                 .setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)

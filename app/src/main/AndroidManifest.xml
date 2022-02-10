@@ -11,13 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoteApp">
         <activity
-            android:name=".Activity.UpdateNoteActivity"
+            android:name=".UpdateNoteActivity"
             android:exported="false" />
         <activity
             android:name=".InsertNoteActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.SplashScreen"
+            android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

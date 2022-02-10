@@ -1,13 +1,10 @@
-package com.example.noteapp.Activity;
+package com.example.noteapp;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.noteapp.MainActivity;
-import com.example.noteapp.R;
 
 public class SplashScreen extends AppCompatActivity {
 

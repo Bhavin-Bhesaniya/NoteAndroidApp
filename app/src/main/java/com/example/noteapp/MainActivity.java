@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setAdatper(List<Note> notes) {
-        noteRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        noteRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         noteAdatper = new NoteAdatper(MainActivity.this, notes);
         noteRecyclerView.setAdapter(noteAdatper);
     }

@@ -1,4 +1,4 @@
-package com.example.noteapp.Activity;
+package com.example.noteapp;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
@@ -22,10 +22,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.noteapp.AlarmReceiver;
 import com.example.noteapp.Entity.Note;
-import com.example.noteapp.MainActivity;
-import com.example.noteapp.R;
 import com.example.noteapp.ViewModel.NoteViewModel;
 import com.example.noteapp.databinding.ActivityUpdateNoteBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
