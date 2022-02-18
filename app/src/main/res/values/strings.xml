@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NoteApp</string>
+    <string name="Details">Details</string>
+    <string name="priority">Priority</string>
 </resources>

@@ -9,10 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.noteapp.UpdateNoteActivity;
 import com.example.noteapp.Entity.Note;
 import com.example.noteapp.MainActivity;
 import com.example.noteapp.R;
+import com.example.noteapp.UpdateNoteActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,6 @@ public class NoteAdatper extends RecyclerView.Adapter<NoteAdatper.NoteViewHolder
         Note note = notes.get(position);
         holder.title.setText(note.note_title);
         holder.noteDetail.setText(note.notes);
-        holder.notesDate.setText(note.note_date);
         holder.noteTime.setText(note.note_time);
 
         if (note.note_priority.equals("3")) {
@@ -61,7 +60,6 @@ public class NoteAdatper extends RecyclerView.Adapter<NoteAdatper.NoteViewHolder
             intent.putExtra("title", note.note_title);
             intent.putExtra("note", note.notes);
             intent.putExtra("priority", note.note_priority);
-            intent.putExtra("date", note.note_date);
             intent.putExtra("time", note.note_time);
             mainActivity.startActivity(intent);
         });
@@ -73,14 +71,13 @@ public class NoteAdatper extends RecyclerView.Adapter<NoteAdatper.NoteViewHolder
     }
 
     public static class NoteViewHolder extends RecyclerView.ViewHolder {
-        TextView title, notesDate, noteDetail, noteTime;
+        TextView title, noteDetail, noteTime;
         View notePriority;
 
         public NoteViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.showNoteTitle);
             noteDetail = itemView.findViewById(R.id.showDetail);
-            notesDate = itemView.findViewById(R.id.showNoteDate);
             notePriority = itemView.findViewById(R.id.showNotePriority);
             noteTime = itemView.findViewById(R.id.showNoteTime);
         }

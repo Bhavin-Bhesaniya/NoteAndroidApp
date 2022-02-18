@@ -12,8 +12,11 @@
         <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/drawable/filter_list_btn.xml" value="0.1305" />
         <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/drawable/filter_list_btn_drawable.xml" value="0.117" />
         <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2175" />
+        <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.2555" />
         <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/drawable/ic_baseline_done_24.xml" value="0.2175" />
+        <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2555" />
         <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/drawable/ic_filter_list.xml" value="0.1305" />
+        <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/drawable/ic_new_note.xml" value="0.2555" />
         <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/drawable/no_note_delete.xml" value="0.2455" />
         <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/drawable/no_note_delete_btn.xml" value="0.1305" />
         <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/drawable/red_shape.xml" value="0.2175" />
@@ -22,7 +25,8 @@
         <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
         <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/layout/activity_update_note.xml" value="0.25" />
         <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/layout/delete_bottom_sheet.xml" value="0.4" />
-        <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/layout/item_note.xml" value="0.264" />
+        <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/layout/item_note.xml" value="0.1" />
+        <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/layout/switch_item.xml" value="0.23148148148148148" />
         <entry key="..\:/AndroidProject/NoteApp/app/src/main/res/menu/search_note.xml" value="0.176" />
       </map>
     </option>

@@ -1,7 +1,6 @@
 package com.example.noteapp;
 
 import android.app.AlarmManager;
-import android.app.DatePickerDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -11,7 +10,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +28,7 @@ import java.util.Calendar;
 public class InsertNoteActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityInsertNoteBinding binding;
-    String note_title, note_detail, priority = "1";
+    String note_title, note_detail, priority = "1", note_time;
 
     NoteViewModel noteViewModel;
 
@@ -40,7 +38,7 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
     //Time Picker
     int cyear, cmonth, cday;
     MaterialTimePicker picker;
-    Calendar calendar;
+    Calendar calendar = Calendar.getInstance();
 
 
     @Override
@@ -54,7 +52,6 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
         binding.priorityHigh.setOnClickListener(this);
         binding.priorityMedium.setOnClickListener(this);
         binding.priorityLow.setOnClickListener(this);
-        binding.setDateBtn.setOnClickListener(this);
         binding.setTimeBtn.setOnClickListener(this);
         binding.saveNoteBtn.setOnClickListener(this);
     }
@@ -65,9 +62,16 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
         if (id == R.id.saveNoteBtn) {
             note_title = binding.noteTitle.getText().toString();
             note_detail = binding.notesDetail.getText().toString();
-            CreateNotes(note_title, note_detail);
-        } else if (id == R.id.setDateBtn) {
-            showDatePicker();
+            note_time = binding.timeDispTime.getText().toString();
+            if (!note_title.isEmpty() || !note_detail.isEmpty()) {
+                if (!note_time.isEmpty()) {
+                    CreateNotes(note_title, note_detail);
+                } else {
+                    Toast.makeText(this, "Please Select Time", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "Please Enter Details", Toast.LENGTH_SHORT).show();
+            }
         } else if (id == R.id.setTimeBtn) {
             showTimePicker();
         } else if (id == R.id.priorityHigh) {
@@ -92,7 +96,6 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
         Note note = new Note();
         note.note_title = note_title;
         note.notes = note_detail;
-        note.note_date = binding.dateDispTime.getText().toString();
         note.note_priority = priority;
         note.note_time = binding.timeDispTime.getText().toString();
         noteViewModel.InsertNote(note);
@@ -100,27 +103,6 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
         scheduleNotification(getNotification(note_title, note_detail), calendar.getTimeInMillis());
         Toast.makeText(getApplicationContext(), "Note Added SuccessFully", Toast.LENGTH_SHORT).show();
         finish();
-    }
-
-    private void showDatePicker() {
-        if (null == calendar) {
-            calendar = Calendar.getInstance();
-        }
-        cyear = calendar.get(Calendar.YEAR);
-        cmonth = calendar.get(Calendar.MONTH);
-        cday = calendar.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(InsertNoteActivity.this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                binding.dateDispTime.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            }
-        }, cyear, cmonth, cday);
-        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis() - 1000);
-        datePickerDialog.show();
     }
 
     public void callNotification() {
@@ -154,9 +136,6 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
             } else {
                 binding.timeDispTime.setText(picker.getHour() + " : " + picker.getMinute() + " AM");
             }
-            if (null == calendar) {
-                calendar = Calendar.getInstance();
-            }
             calendar.set(Calendar.HOUR_OF_DAY, picker.getHour());
             calendar.set(Calendar.MINUTE, picker.getMinute());
             calendar.set(Calendar.SECOND, 0);
@@ -172,7 +151,7 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
         NotificationCompat.Builder builder = new NotificationCompat.Builder(InsertNoteActivity.this, "Android")
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setContentTitle("Your Note Reminder : " + note_title)
-                .setContentText("\n"+note_detail)
+                .setContentText("\n" + note_detail)
                 .setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)

@@ -20,7 +20,9 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/edit_text_bg"
             android:hint="Title"
-            android:padding="15dp" />
+            android:padding="15dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,10 +39,11 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="20dp"
                 android:padding="5dp"
-                android:text="Priority"
-                android:textColor="@color/black"
+                android:text="@string/priority"
+                android:textColor="@color/white"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
 
             <ImageView
                 android:id="@+id/upPriorityHigh"
@@ -75,12 +78,14 @@
             android:background="@drawable/edit_text_bg"
             android:gravity="start"
             android:hint="Notes"
-            android:padding="15dp" />
+            android:padding="15dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:orientation="horizontal"
             android:padding="10dp">
 
@@ -90,9 +95,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/filter_list_btn"
-                android:padding="10dp"
+                android:padding="12dp"
                 android:text="Set Time"
-                android:textSize="20sp"
+                android:textColor="@color/yellow"
+                android:textColorHint="@color/white"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -101,35 +108,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/setDateBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/filter_list_btn"
-                android:padding="10dp"
-                android:text="Set Date"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/dateDispTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
 

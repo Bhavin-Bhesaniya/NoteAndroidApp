@@ -11,8 +11,8 @@
     <!-- Custom Color   -->
     <color name="blue">#101F51</color>
     <color name="green">#26FF00</color>
-    <color name="yellow">#FBDA00</color>
+    <color name="yellow">#E4D255</color>
     <color name="red">#FF0000</color>
-    <color name="bg">#BFF1EF</color>
+    <color name="bg">#004343</color>
     <color name="gray">#707070</color>
 </resources>

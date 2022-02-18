@@ -16,9 +16,6 @@ public class Note {
     @ColumnInfo(name = "note_details")
     public String notes;
 
-    @ColumnInfo(name = "note_date")
-    public String note_date;
-
     @ColumnInfo(name = "note_priority")
     public String note_priority;
 

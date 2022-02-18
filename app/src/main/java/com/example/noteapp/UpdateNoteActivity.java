@@ -1,7 +1,6 @@
 package com.example.noteapp;
 
 import android.app.AlarmManager;
-import android.app.DatePickerDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -13,7 +12,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -42,7 +40,7 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
     //Time Picker
     int cyear, cmonth, cday;
     MaterialTimePicker picker;
-    Calendar calendar;
+    Calendar calendar = Calendar.getInstance();
 
     //Notification
     NotificationManagerCompat notificationCompat;
@@ -76,13 +74,11 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
             binding.upPriorityLow.setImageResource(R.drawable.ic_baseline_done_24);
         }
         binding.timeDispTime.setText(up_note_time);
-        binding.dateDispTime.setText(up_note_date);
 
 
         binding.upPriorityHigh.setOnClickListener(this);
         binding.upPriorityMedium.setOnClickListener(this);
         binding.upPriorityLow.setOnClickListener(this);
-        binding.setDateBtn.setOnClickListener(this);
         binding.setTimeBtn.setOnClickListener(this);
         binding.updateNoteBtn.setOnClickListener(this);
         binding.deleteNoteBtn.setOnClickListener(this);
@@ -104,7 +100,6 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
         note.note_title = title;
         note.notes = noteDetail;
         note.note_priority = priority;
-        note.note_date = binding.dateDispTime.getText().toString();
         note.note_time = binding.timeDispTime.getText().toString();
         scheduleNotification(getNotification(title, noteDetail), calendar.getTimeInMillis());
         noteViewModel.UpdateNote(note);
@@ -136,8 +131,6 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
             binding.upPriorityLow.setImageResource(R.drawable.ic_baseline_done_24);
             binding.upPriorityMedium.setImageResource(0);
             binding.upPriorityHigh.setImageResource(0);
-        } else if (id == R.id.setDateBtn) {
-            showDatePicker();
         } else if (id == R.id.setTimeBtn) {
             showTimePicker();
         } else if (id == R.id.deleteNoteBtn) {
@@ -161,24 +154,7 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    private void showDatePicker() {
-        Calendar calendar = Calendar.getInstance();
-        cyear = calendar.get(Calendar.YEAR);
-        cmonth = calendar.get(Calendar.MONTH);
-        cday = calendar.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(UpdateNoteActivity.this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                binding.dateDispTime.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
-            }
-        }, cyear, cmonth, cday);
-        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis() - 1000);
-        datePickerDialog.show();
-    }
-
     private void showTimePicker() {
-
         picker = new MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_12H)
                 .setHour(12)
@@ -193,7 +169,6 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
             } else {
                 binding.timeDispTime.setText(picker.getHour() + " : " + picker.getMinute() + " AM");
             }
-            calendar = Calendar.getInstance();
             calendar.set(Calendar.HOUR_OF_DAY, picker.getHour());
             calendar.set(Calendar.MINUTE, picker.getMinute());
             calendar.set(Calendar.SECOND, 0);
