@@ -100,7 +100,7 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
         note.note_time = binding.timeDispTime.getText().toString();
         noteViewModel.InsertNote(note);
         callNotification();
-        scheduleNotification(getNotification(note_title, note_detail), calendar.getTimeInMillis());
+        scheduleNotification(getNotification(note_title), calendar.getTimeInMillis());
         Toast.makeText(getApplicationContext(), "Note Added SuccessFully", Toast.LENGTH_SHORT).show();
         finish();
     }
@@ -143,15 +143,15 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
         });
     }
 
-    private Notification getNotification(String note_title, String note_detail) {
+    private Notification getNotification(String note_title) {
         Intent i = new Intent(this, MainActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, i, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(InsertNoteActivity.this, "Android")
                 .setSmallIcon(R.drawable.ic_launcher)
-                .setContentTitle("Your Note Reminder : " + note_title)
-                .setContentText("\n" + note_detail)
+                .setContentTitle("Your Note Reminder : ")
+                .setContentText(note_title)
                 .setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)

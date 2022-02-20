@@ -24,7 +24,7 @@
         android:layout_marginTop="35dp"
         android:gravity="center"
         android:text="Note App"
-        android:textColor="@color/blue"
+        android:textColor="@color/yellow"
         android:textSize="30sp"
         android:textStyle="bold"
         tools:ignore="MissingConstraints" />
@@ -36,6 +36,7 @@
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:outlineSpotShadowColor="@color/yellow"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -45,8 +46,9 @@
         android:layout_marginTop="150dp"
         android:gravity="center"
         android:text="By Bhavin Bhesaniya"
-        android:textColor="@color/cardview_dark_background"
+        android:textColor="@color/yellow"
         android:textSize="25sp"
+        android:textStyle="bold"
         tools:layout_editor_absoluteY="670dp" />
 
 </LinearLayout>

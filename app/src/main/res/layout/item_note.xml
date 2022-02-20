@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@color/bg"
-        app:cardCornerRadius="15dp">
+        android:background="@drawable/yellow_border"
+        app:cardCornerRadius="12dp">
 
         <View
             android:id="@+id/showNotePriority"
@@ -34,7 +34,7 @@
                 android:layout_marginStart="5dp"
                 android:padding="7dp"
                 android:text="Title"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/blue"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -46,9 +46,9 @@
                 android:maxLines="2"
                 android:padding="7dp"
                 android:text="@string/Details"
-                android:textColor="@color/black"
+                android:textColor="@color/blue"
                 android:textSize="18sp"
-                android:textStyle="normal"
+                android:textStyle="bold"
                 tools:ignore="HardcodedText,RtlHardcoded" />
 
             <LinearLayout
@@ -63,7 +63,7 @@
                     android:layout_marginLeft="5dp"
                     android:padding="5dp"
                     android:text="Time"
-                    android:textColor="@color/black"
+                    android:textColor="@color/blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>

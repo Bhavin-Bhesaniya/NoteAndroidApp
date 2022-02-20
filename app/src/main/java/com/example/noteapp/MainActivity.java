@@ -103,17 +103,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         } else if (id == R.id.NoFilterTv) {
             loadData(0);
-            noFilter.setBackgroundResource(R.drawable.filter_list_btn_border);
+            noFilter.setBackgroundResource(R.drawable.yellow_border);
             highToLowFilter.setBackgroundResource(R.drawable.filter_list_btn);
             lowToHighFilter.setBackgroundResource(R.drawable.filter_list_btn);
         } else if (id == R.id.HighToLowTv) {
             loadData(1);
-            highToLowFilter.setBackgroundResource(R.drawable.filter_list_btn_border);
+            highToLowFilter.setBackgroundResource(R.drawable.yellow_border);
             noFilter.setBackgroundResource(R.drawable.filter_list_btn);
             lowToHighFilter.setBackgroundResource(R.drawable.filter_list_btn);
         } else {
             loadData(2);
-            lowToHighFilter.setBackgroundResource(R.drawable.filter_list_btn_border);
+            lowToHighFilter.setBackgroundResource(R.drawable.yellow_border);
             highToLowFilter.setBackgroundResource(R.drawable.filter_list_btn);
             noFilter.setBackgroundResource(R.drawable.filter_list_btn);
         }
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setAdatper(List<Note> notes) {
-        noteRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        noteRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         noteAdatper = new NoteAdatper(MainActivity.this, notes);
         noteRecyclerView.setAdapter(noteAdatper);
     }

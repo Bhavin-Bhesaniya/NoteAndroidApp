@@ -55,14 +55,12 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
         setContentView(binding.getRoot());
 
         noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
-
         up_note_id = getIntent().getIntExtra("id", 0);
         up_note_title = getIntent().getStringExtra("title");
         up_note_detail = getIntent().getStringExtra("note");
         priority = getIntent().getStringExtra("priority");
         up_note_date = getIntent().getStringExtra("date");
         up_note_time = getIntent().getStringExtra("time");
-
 
         binding.upNoteTitle.setText(up_note_title);
         binding.upNotesDetail.setText(up_note_detail);
@@ -74,34 +72,22 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
             binding.upPriorityLow.setImageResource(R.drawable.ic_baseline_done_24);
         }
         binding.timeDispTime.setText(up_note_time);
-
-
         binding.upPriorityHigh.setOnClickListener(this);
         binding.upPriorityMedium.setOnClickListener(this);
         binding.upPriorityLow.setOnClickListener(this);
         binding.setTimeBtn.setOnClickListener(this);
         binding.updateNoteBtn.setOnClickListener(this);
         binding.deleteNoteBtn.setOnClickListener(this);
-
-
     }
 
     private void UpdateNotes(String title, String noteDetail) {
-//        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-//        try {
-//            datetm = sdf.parse(up_note_time);
-//        } catch (ParseException e) {
-//            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
-//        }
-//        calendar.setTime(datetm);
-
         Note note = new Note();
         note.id = up_note_id;
         note.note_title = title;
         note.notes = noteDetail;
         note.note_priority = priority;
         note.note_time = binding.timeDispTime.getText().toString();
-        scheduleNotification(getNotification(title, noteDetail), calendar.getTimeInMillis());
+        scheduleNotification(getNotification(title), calendar.getTimeInMillis());
         noteViewModel.UpdateNote(note);
         callNotification();
         Toast.makeText(getApplicationContext(), "Note Updated SuccessFully", Toast.LENGTH_SHORT).show();
@@ -115,7 +101,16 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
         if (id == R.id.updateNoteBtn) {
             String title = binding.upNoteTitle.getText().toString();
             String noteDetail = binding.upNotesDetail.getText().toString();
-            UpdateNotes(title, noteDetail);
+            String noteTime = binding.timeDispTime.getText().toString();
+            if (!title.isEmpty() || !noteDetail.isEmpty()) {
+                if (!noteTime.isEmpty()) {
+                    UpdateNotes(title, noteDetail);
+                } else {
+                    Toast.makeText(this, "Please Select Time", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "Please Enter Details", Toast.LENGTH_SHORT).show();
+            }
         } else if (id == R.id.upPriorityHigh) {
             priority = "3";
             binding.upPriorityHigh.setImageResource(R.drawable.ic_baseline_done_24);
@@ -186,21 +181,21 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setContentTitle("Note App Notification")
                 .setContentText("Note Updated Successfully")
-                .setTimeoutAfter(7000);
+                .setTimeoutAfter(4000);
         notification = builder.build();
         notificationCompat = NotificationManagerCompat.from(this);
         notificationCompat.notify(1, notification);
     }
 
-    private Notification getNotification(String note_title, String note_detail) {
+    private Notification getNotification(String note_title) {
         Intent i = new Intent(this, MainActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, i, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(UpdateNoteActivity.this, "Android")
                 .setSmallIcon(R.drawable.ic_launcher)
-                .setContentTitle("Reminder For your Note : " + note_title)
-                .setContentText(note_detail)
+                .setContentTitle("Reminder For your Note : ")
+                .setContentText(note_title)
                 .setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)

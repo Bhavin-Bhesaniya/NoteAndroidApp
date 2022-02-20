@@ -21,7 +21,9 @@
             android:background="@drawable/edit_text_bg"
             android:hint="Title"
             android:padding="15dp"
-            android:textColorHint="@color/white" />
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,7 +81,8 @@
             android:hint="Notes"
             android:padding="15dp"
             android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/white"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -95,7 +98,7 @@
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/filter_list_btn"
                 android:padding="10dp"
-                android:text="Set Time"
+                android:text="Set Due Time"
                 android:textColor="@color/yellow"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -123,6 +126,8 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="28dp"
+        android:background="@drawable/edit_text_bg"
+        android:backgroundTint="@color/yellow"
         android:src="@drawable/ic_baseline_done_24"
         tools:ignore="SpeakableTextPresentCheck" />
 </RelativeLayout>
