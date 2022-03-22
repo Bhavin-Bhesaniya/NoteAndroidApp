@@ -28,7 +28,6 @@ import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class UpdateNoteActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,7 +37,6 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
     NoteViewModel noteViewModel;
 
     //Time Picker
-    int cyear, cmonth, cday;
     MaterialTimePicker picker;
     Calendar calendar = Calendar.getInstance();
 
@@ -46,7 +44,6 @@ public class UpdateNoteActivity extends AppCompatActivity implements View.OnClic
     NotificationManagerCompat notificationCompat;
     Notification notification;
 
-    Date datetm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

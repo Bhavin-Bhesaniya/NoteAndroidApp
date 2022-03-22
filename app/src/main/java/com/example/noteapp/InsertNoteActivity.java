@@ -1,5 +1,6 @@
 package com.example.noteapp;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -121,6 +122,7 @@ public class InsertNoteActivity extends AppCompatActivity implements View.OnClic
         notificationCompat.notify(1, notification);
     }
 
+    @SuppressLint("SetTextI18n")
     private void showTimePicker() {
         picker = new MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_12H)

@@ -1,6 +1,5 @@
 package com.example.noteapp;
 
-import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -38,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean filterVisible = true, fabOnOff = true;
     List<Note> filterNoteList;
 
-    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,7 +147,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_note, menu);
         MenuItem menuItem = menu.findItem(R.id.app_bar_search);
-
         SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setQueryHint("Search Note...");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

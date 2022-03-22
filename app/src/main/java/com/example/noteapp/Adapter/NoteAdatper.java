@@ -14,7 +14,6 @@ import com.example.noteapp.MainActivity;
 import com.example.noteapp.R;
 import com.example.noteapp.UpdateNoteActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NoteAdatper extends RecyclerView.Adapter<NoteAdatper.NoteViewHolder> {
@@ -26,7 +25,7 @@ public class NoteAdatper extends RecyclerView.Adapter<NoteAdatper.NoteViewHolder
     public NoteAdatper(MainActivity mainActivity, List<Note> notes) {
         this.mainActivity = mainActivity;
         this.notes = notes;
-        allNote = new ArrayList<>(notes);
+        allNote = notes;
     }
 
     public void searchNote(List<Note> filterName) {
