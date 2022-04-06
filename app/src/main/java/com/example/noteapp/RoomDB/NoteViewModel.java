@@ -1,13 +1,10 @@
-package com.example.noteapp.ViewModel;
+package com.example.noteapp.RoomDB;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-
-import com.example.noteapp.Entity.Note;
-import com.example.noteapp.Repository.NoteRepo;
 
 import java.util.List;
 

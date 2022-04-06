@@ -1,12 +1,10 @@
-package com.example.noteapp.Dao;
+package com.example.noteapp.RoomDB;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-
-import com.example.noteapp.Entity.Note;
 
 import java.util.List;
 

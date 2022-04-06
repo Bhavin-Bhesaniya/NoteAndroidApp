@@ -1,4 +1,4 @@
-package com.example.noteapp.Adapter;
+package com.example.noteapp.RoomDB;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.noteapp.Entity.Note;
 import com.example.noteapp.MainActivity;
 import com.example.noteapp.R;
 import com.example.noteapp.UpdateNoteActivity;

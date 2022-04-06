@@ -18,8 +18,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.noteapp.Entity.Note;
-import com.example.noteapp.ViewModel.NoteViewModel;
+import com.example.noteapp.RoomDB.Note;
+import com.example.noteapp.RoomDB.NoteViewModel;
 import com.example.noteapp.databinding.ActivityInsertNoteBinding;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;

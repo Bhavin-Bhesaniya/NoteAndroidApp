@@ -1,13 +1,10 @@
-package com.example.noteapp.Database;
+package com.example.noteapp.RoomDB;
 
 import android.content.Context;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-
-import com.example.noteapp.Dao.NoteDao;
-import com.example.noteapp.Entity.Note;
 
 
 @Database(entities = {Note.class}, version = 1, exportSchema = false)

@@ -17,9 +17,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.example.noteapp.Adapter.NoteAdatper;
-import com.example.noteapp.Entity.Note;
-import com.example.noteapp.ViewModel.NoteViewModel;
+import com.example.noteapp.RoomDB.NoteAdatper;
+import com.example.noteapp.RoomDB.Note;
+import com.example.noteapp.RoomDB.NoteViewModel;
 import com.example.noteapp.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;

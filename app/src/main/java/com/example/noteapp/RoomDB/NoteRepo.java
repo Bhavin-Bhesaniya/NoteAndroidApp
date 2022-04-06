@@ -1,12 +1,8 @@
-package com.example.noteapp.Repository;
+package com.example.noteapp.RoomDB;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
-
-import com.example.noteapp.Dao.NoteDao;
-import com.example.noteapp.Database.NoteDB;
-import com.example.noteapp.Entity.Note;
 
 import java.util.List;
 
